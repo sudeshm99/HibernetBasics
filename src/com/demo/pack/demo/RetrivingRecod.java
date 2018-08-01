@@ -6,10 +6,10 @@ import org.hibernate.cfg.Configuration;
 
 import com.demo.pack.entity.Student;
 
-public class CreateStudentDemo {
+public class RetrivingRecod {
 
 	public static void main(String[] args) {
-			
+		
 		// create session factory
 		SessionFactory factory = new Configuration()
 								.configure("hibernate.cfg.xml")
@@ -19,15 +19,16 @@ public class CreateStudentDemo {
 		Session session = factory.getCurrentSession();
 		
 		try{
-			// save the data using session
-			// create a student object
-			Student studentOne = new Student("sud","madushanka","sud@gmail.com");
 			System.out.println("starting transaction");
 			// start a transaction 
 			session.beginTransaction();
 			// save the student object
 			System.out.println("save student");
-			session.save(studentOne);
+			Student myStd = session.get(Student.class, 1);
+			System.out.println("-------------------------------");
+			System.out.println(myStd);
+			System.out.println(myStd.getFirstName());
+			System.out.println("-------------------------------");
 			// commit transaction
 			System.out.println("commit");
 			session.getTransaction().commit();
@@ -37,6 +38,7 @@ public class CreateStudentDemo {
 		}finally{
 			factory.close();
 		}
+
 	}
 
 }

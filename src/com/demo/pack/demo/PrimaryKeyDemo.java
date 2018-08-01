@@ -6,10 +6,9 @@ import org.hibernate.cfg.Configuration;
 
 import com.demo.pack.entity.Student;
 
-public class CreateStudentDemo {
-
+public class PrimaryKeyDemo {
 	public static void main(String[] args) {
-			
+		
 		// create session factory
 		SessionFactory factory = new Configuration()
 								.configure("hibernate.cfg.xml")
@@ -20,14 +19,18 @@ public class CreateStudentDemo {
 		
 		try{
 			// save the data using session
-			// create a student object
-			Student studentOne = new Student("sud","madushanka","sud@gmail.com");
+			// create 3 student object
+			Student studentOne = new Student("first","one","one@gmail.com");
+			Student studentTwo = new Student("second","two","two@gmail.com");
+			Student studentTree = new Student("therd","tree","tree@gmail.com");
 			System.out.println("starting transaction");
 			// start a transaction 
 			session.beginTransaction();
-			// save the student object
+			// save 3 student object
 			System.out.println("save student");
 			session.save(studentOne);
+			session.save(studentTwo);
+			session.save(studentTree);
 			// commit transaction
 			System.out.println("commit");
 			session.getTransaction().commit();
@@ -38,5 +41,4 @@ public class CreateStudentDemo {
 			factory.close();
 		}
 	}
-
 }
